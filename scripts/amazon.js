@@ -18,7 +18,7 @@ products.forEach((product) => {
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${product.rating.stars * 10}.png">
+          src="${product.getStarsUrl()}">
         <div class="product-rating-count link-primary">
           ${product.rating.count}
         </div>
@@ -72,17 +72,14 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
 
-    // Read selected quantity for this product
     const quantitySelector = document.querySelector(
       `.js-quantity-selector-${productId}`,
     );
     const quantity = Number(quantitySelector.value);
 
-    // addToCart handles merging into existing cart item or pushing a new one
     addToCart(productId, quantity);
     updateCartQuantity();
 
-    // Show "Added" message and reset its timeout
     const addedMessage = document.querySelector(
       `.js-added-to-cart-${productId}`,
     );
